@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+
+    <script>
+        window.onload = function() {
+            var checkbox = document.getElementById('same_billing_delivery_address');
+            var deliveryAddress = document.getElementById('delivery_address');
+        
+            checkbox.addEventListener('change', function() {
+                if(this.checked) {
+                    deliveryAddress.style.display = 'none';
+                } else {
+                    deliveryAddress.style.display = 'block';
+                }
+            });
+        }
+    </script>
+
+    <h1>Register</h1>
+    <form action="/register" method="post">
+        <label for="first_name">First name:</label>
+        <input type="text" id="first_name" name="first_name" required>
+        <label for="last_name">Last name:</label>
+        <input type="text" id="last_name" name="last_name" required>
+        <br>
+
+        <label for="tel_no">Telephone number:</label>
+        <input type="tel" id="tel_no" name="tel_no" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+
+        <label for="user_name">Username:</label>
+        <input type="text" id="user_name" name="user_name" required> 
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <label for="confirm_password">Confirm password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required>
+        <br>
+
+        <h4>Billing address</h4>
+        <label for="street">Street:</label>
+        <input type="text" id="street" name="street" required>
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required>
+        <label for="postal_code">Postal code:</label>
+        <input type="text" id="postal_code" name="postal_code" required>
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" required>
+        
+        <label for="same_billing_delivery_address">Same billing delivery address?</label>
+        <input type="checkbox" id="same_billing_delivery_address" name="same_billing_delivery_address">
+        <br>
+
+        <div id="delivery_address">
+            <h4>Delivery address</h4>  
+            <label for="street_delivery">Street:</label>
+            <input type="text" id="street_delivery" name="street_delivery">
+            <label for="city_delivery">City:</label>
+            <input type="text" id="city_delivery" name="city_delivery">
+            <label for="postal_code_delivery">Postal code:</label>
+            <input type="text" id="postal_code_delivery" name="postal_code_delivery">
+            <label for="country_delivery">Country:</label>
+            <input type="text" id="country_delivery" name="country_delivery">
+        </div>        
+
+        <input type="submit" value="register">
+    </form>
+
+    <p>Already have an account? <a href="/login">Login</a></p>
+</body>
+</html>

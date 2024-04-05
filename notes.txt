@@ -1,0 +1,37 @@
+------------------------------------------------
+MERN STACK
+--------------------------
+Code Linter and Formatter
+------------------------------
+Install Node.js
+Install MySQL
+-------------
+Adding MySQL to path variables
+Access MySQL from terminal
+mysql -u root -p
+Show databases
+SHOW DATABASES;
+exit
+exit or quit
+----------------------------
+Terminal
+npm init
+npm install express
+--------------------------
+CREATING A SIMPLE EXPRESS.JS Server
+----------------------------
+SET UP MySQL DATABASE AND CONNECT TO EXPRESS.JS Server
+-------------------------
+configure application to use environment variables with dotenv and set up user registration with bcrypt for password hashing.
+ .env file in root directory and environment variables
+db.js file
+server.js file: user registration. hash password with bcrypt before storing it in the database
+views (EJS files) for 'register' and 'welcome'
+-------------------------------------
+IMPLEMENT USER LOGIN
+new route in server.js to handle login requests
+login.ejs view. The form should make a POST request to /login.
+dashboard.ejs view. Rendered when the user logs in successfully.
+------------------------
+SETTING UP PASSPORT.js
+Passport.js middleware authentication. Modular Design: strategies, local
