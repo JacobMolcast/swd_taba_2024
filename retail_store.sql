@@ -18,10 +18,10 @@ CREATE TABLE products (
 CREATE TABLE delivery_address (
   delivery_address_id INT AUTO_INCREMENT NOT NULL,
   -- customer_id INT(4),
-  street VARCHAR(100),
-  city VARCHAR(50),
-  postal_code VARCHAR(20),
-  country VARCHAR(100),  
+  street_delivery VARCHAR(100),
+  city_delivery VARCHAR(50),
+  postal_code_delivery VARCHAR(20),
+  country_delivery VARCHAR(100),  
   PRIMARY KEY (delivery_address_id)
   -- FOREIGN KEY (customer_id) REFERENCES customers (customer_id) ON UPDATE CASCADE
 );

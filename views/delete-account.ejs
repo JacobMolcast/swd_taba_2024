@@ -1,0 +1,17 @@
+
+<h1>Don't leave us please!!</h1>
+
+<p>Are you sure you want to dump me? <a href="/dashboard"><button type="button">NO</button></a></p>
+
+<form action="/delete-account" method="post">
+    <input type="submit" value="YES">
+</form>
+
+<script>
+    window.onload = function() {
+        var form = document.querySelector('form');
+        form.addEventListener('submit', function() {
+            alert('Already miss you!');
+        });
+    }
+</script>

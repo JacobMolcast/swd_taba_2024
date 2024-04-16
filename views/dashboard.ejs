@@ -11,5 +11,10 @@
     <form action="/logout" method="POST">
         <button type="submit">Log out</button>
     </form>
+    <a href="/edit-profile"><button type="button">Edit Profile</button></a>
+    <a href="/delete-account"><button type="button">Delete account</button></a>
+    <% if (id === 1) { %>
+        <a href="/admin"><button type="button">Admin</button></a>
+    <% } %>
 </body>
 </html>

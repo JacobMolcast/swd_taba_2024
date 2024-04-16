@@ -55,10 +55,10 @@ register = async (req, res) => {
           same_billing_delivery_address)
           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           INSERT INTO delivery_address(
-            street,
-            city,
-            postal_code,
-            country)
+            street_delivery,
+            city_delivery,
+            postal_code_delivery,
+            country_delivery)
             VALUES (?, ?, ?, ?);
         `;
       sqlValues = [

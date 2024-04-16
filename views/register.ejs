@@ -19,6 +19,16 @@
                     deliveryAddress.style.display = 'block';
                 }
             });
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirm_password');
+
+            confirmPassword.oninput = function() {
+                if (password.value !== confirmPassword.value) {
+                    confirmPassword.setCustomValidity('Passwords do not match.');
+                } else {
+                    confirmPassword.setCustomValidity('');
+                }
+            };
         }
     </script>
 
