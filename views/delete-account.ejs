@@ -1,17 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+    <script>
+        window.onload = function() {
+            var form = document.querySelector('form');
+            form.addEventListener('submit', function() {
+                alert('Already miss you!');
+            });
+        }
+    </script>
+    <%- include("../public/header.ejs") -%>
+    <h1>Don't leave me please!! &#128546;</h1>
+    <form action="/delete-account" method="post">
+        <p>Are you sure you want to dump me? <a href="/dashboard">NO</a></p>
+        <input type="submit" value="YES">
+    </form>
 
-<h1>Don't leave us please!!</h1>
-
-<p>Are you sure you want to dump me? <a href="/dashboard"><button type="button">NO</button></a></p>
-
-<form action="/delete-account" method="post">
-    <input type="submit" value="YES">
-</form>
-
-<script>
-    window.onload = function() {
-        var form = document.querySelector('form');
-        form.addEventListener('submit', function() {
-            alert('Already miss you!');
-        });
-    }
-</script>
+</body>
+</html>

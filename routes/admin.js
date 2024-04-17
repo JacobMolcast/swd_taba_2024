@@ -6,10 +6,8 @@ const retrieve_all = (req, res) => {
       `SELECT * FROM customers LEFT JOIN delivery_address USING (delivery_address_id)`,
       (error, results) => {
         if (error) {
-          console.error(error);
           res.redirect("/dashboard");
         } else {
-            console.log(results);
           res.render("admin", {
             all: results
           });

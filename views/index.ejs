@@ -1,6 +1,20 @@
-Hello I'm the home page<br>
-
-<a href="/about"> About Page</a><br>
-<a href="/login"> login</a><br>
-<a href="/signup"> signup</a><br>
-<a href="/register"> register</a><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+    <%- include("../public/header.ejs") -%>
+    <h1>Welcome</h1>
+    <div class="center-anchors">
+        <!-- <a href="/about"> About Page</a><br> -->
+        <a href="/login"> login</a><br>
+        <!-- <a href="/signup"> signup</a><br> -->
+        <a href="/register"> register</a><br>
+    </div>
+    <%- include("../public/footer.ejs") -%>
+</body>
+</html>

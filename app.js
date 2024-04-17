@@ -2,8 +2,16 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const express = require("express");
+const path = require("path");
 const app = express();
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, "public")));
 const bodyParser = require("body-parser");
+app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(express.static("public"));
+// parse application/json
+// app.use(bodyParser.json());
 
 const register = require("./routes/register.js");
 const {retrieve, update} = require("./routes/update.js");
@@ -19,11 +27,6 @@ const {
   checkNotAuthenticated,
 } = require("./routes/auth.js");
 initializePassport(passport);
-
-app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({ extended: false }));
-// parse application/json
-// app.use(bodyParser.json());
 
 app.use(flash());
 app.use(
