@@ -4,14 +4,10 @@ dotenv.config();
 const express = require("express");
 const path = require("path");
 const app = express();
-// Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, "public")));
 const bodyParser = require("body-parser");
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(express.static("public"));
-// parse application/json
-// app.use(bodyParser.json());
 
 const register = require("./routes/register.js");
 const {retrieve, update} = require("./routes/update.js");
@@ -66,7 +62,6 @@ app.post("/login", checkNotAuthenticated, (req, res, next) => {
 app.post("/logout", authenticationMiddleware(), (req, res) => {
   req.session.destroy(function (err) {
     if (err) {
-      // Handle the error
       console.error(err); // remove this line for production
       return res.redirect("/login");
     }
@@ -98,7 +93,6 @@ app.post("/delete-account", authenticationMiddleware(), (req, res) => {
   delete_account(req, res);
   req.session.destroy(function (err) {
     if (err) {
-      // Handle the error
       console.error(err); // remove this line for production
       return res.redirect("/");
     }
@@ -108,6 +102,18 @@ app.post("/delete-account", authenticationMiddleware(), (req, res) => {
 
 app.get("/admin", authenticationMiddleware(), (req, res) => {
   retrieve_all(req, res);
+});
+ 
+app.use((req, res, next) => {
+  res.status(404);
+  res.redirect('/'); // Render a specific 404 page
+});
+
+// Global error handling
+app.use((err, req, res, next) => {
+  console.error('Error:', err);
+  res.status(500)
+  res.redirect('/'); // Render a general eror page
 });
 
 app.listen(3000, () => console.log("Server is running on port 3000"));

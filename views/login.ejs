@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="/style.css">
+    <script src="https://unpkg.com/htmx.org"></script>
 </head>
 <body>
     <%- include("../public/header.ejs") -%>
     <h1>Login</h1>
-    <div class="container">
+    <div id="login" class="container">
         <div class="column">
             <% if (messages.error) { %>
                 <p class="error"><%= messages.error %></p>
@@ -27,7 +28,7 @@
             </form>
         </div>
         <div class="column">
-            <p>Don't have an account? <a href="/register">Register</a></p>
+            <p>Don't have an account? <a href="/register" hx-get="/register" hx-swap="outerHTML" hx-target="#login" hx-select="#register">Register</a></p>
             <p>Forgot your password? <a href="/forgot-password">Reset password</a></p>
         </div>
     </div>
