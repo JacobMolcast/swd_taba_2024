@@ -1,5 +1,7 @@
 const db = require("../db.js");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
+const {encrypt, decrypt} = require("./crypto");
 
 let delivery_address_id = 0;
 
@@ -9,49 +11,42 @@ const retrieve = (req, res) => {
     [req.user.customer_id],
     (error, results) => {
       if (error) {
-        //console.error(error);
         res.redirect("/dashboard");
       } else {
-        //console.log(results[0]);
         if (results[0] && results[0].same_billing_delivery_address === 0) {
           delivery_address_id = results[0].delivery_address_id;
           res.render("edit-profile", {
-            first_name: results[0].first_name,
-            last_name: results[0].last_name,
-            tel_no: results[0].tel_no,
-            email: results[0].email,
-            user_name: results[0].user_name,
-            // password: results[0].user_password,
-            // confirm_password: results[0].user_password,
-            street: results[0].street,
-            city: results[0].city,
-            postal_code: results[0].postal_code,
-            country: results[0].country,
-            street_delivery: results[0].street_delivery,
-            city_delivery: results[0].city_delivery,
-            postal_code_delivery: results[0].postal_code_delivery,
-            country_delivery: results[0].country_delivery,
+            first_name: decrypt(results[0].first_name),
+            last_name: decrypt(results[0].last_name),
+            tel_no: decrypt(results[0].tel_no),
+            email: decrypt(results[0].email),
+            user_name: decrypt(results[0].user_name),
+            street: decrypt(results[0].street),
+            city: decrypt(results[0].city),
+            postal_code: decrypt(results[0].postal_code),
+            country: decrypt(results[0].country),
+            street_delivery: decrypt(results[0].street_delivery),
+            city_delivery: decrypt(results[0].city_delivery),
+            postal_code_delivery: decrypt(results[0].postal_code_delivery),
+            country_delivery: decrypt(results[0].country_delivery),
           });
         } else if (results[0] && results[0].same_billing_delivery_address === 1) {
           res.render("edit-profile", {
-            first_name: results[0].first_name,
-            last_name: results[0].last_name,
-            tel_no: results[0].tel_no,
-            email: results[0].email,
-            user_name: results[0].user_name,
-            // password: results[0].user_password,
-            // confirm_password: results[0].user_password,
-            street: results[0].street,
-            city: results[0].city,
-            postal_code: results[0].postal_code,
-            country: results[0].country,
-            street_delivery: results[0].street,
-            city_delivery: results[0].city,
-            postal_code_delivery: results[0].postal_code,
-            country_delivery: results[0].country_delivery,
+            first_name: decrypt(results[0].first_name),
+            last_name: decrypt(results[0].last_name),
+            tel_no: decrypt(results[0].tel_no),
+            email: decrypt(results[0].email),
+            user_name: decrypt(results[0].user_name),
+            street: decrypt(results[0].street),
+            city: decrypt(results[0].city),
+            postal_code: decrypt(results[0].postal_code),
+            country: decrypt(results[0].country),
+            street_delivery: decrypt(results[0].street),
+            city_delivery: decrypt(results[0].city),
+            postal_code_delivery: decrypt(results[0].postal_code),
+            country_delivery: decrypt(results[0].country),
           });
         } else {
-          // Handle the case where no customer was found
           res.redirect("/dashboard");
         }
       }
@@ -83,17 +78,17 @@ update = async (req, res) => {
           WHERE customer_id = ?;
         `;
       sqlValues = [
-        req.body.first_name,
-        req.body.last_name,
-        req.body.tel_no,
-        req.body.email,
-        req.body.user_name,
+        encrypt(req.body.first_name),
+        encrypt(req.body.last_name),
+        encrypt(req.body.tel_no),
+        encrypt(req.body.email),
+        encrypt(req.body.user_name),
         hashedPassword,
         salt,
-        req.body.street,
-        req.body.city,
-        req.body.postal_code,
-        req.body.country,
+        encrypt(req.body.street),
+        encrypt(req.body.city),
+        encrypt(req.body.postal_code),
+        encrypt(req.body.country),
         1,
         req.user.customer_id,
       ];
@@ -121,39 +116,37 @@ update = async (req, res) => {
           WHERE delivery_address_id = ?;
         `;
       sqlValues = [
-        req.body.first_name,
-        req.body.last_name,
-        req.body.tel_no,
-        req.body.email,
-        req.body.user_name,
+        encrypt(req.body.first_name),
+          encrypt(req.body.last_name),
+            encrypt(req.body.tel_no),
+        encrypt(req.body.email),
+        encrypt(req.body.user_name),
         hashedPassword,
         salt,
-        req.body.street,
-        req.body.city,
-        req.body.postal_code,
-        req.body.country,
+        encrypt(req.body.street),
+        encrypt(req.body.city),
+        encrypt(req.body.postal_code),
+        encrypt(req.body.country),
         0,
         req.user.customer_id,
-        req.body.street_delivery,
-        req.body.city_delivery,
-        req.body.postal_code_delivery,
-        req.body.country_delivery,
+        encrypt(req.body.street_delivery),
+        encrypt(req.body.city_delivery),
+        encrypt(req.body.postal_code_delivery),
+        encrypt(req.body.country_delivery),
         delivery_address_id,
       ];
     }
 
     db.query(sql, sqlValues, (error) => {
       if (error) {
-        console.log(error); // don't show this in production
-        res.status(500).send("An error occurred while executing the query."); // change it for servererror.ejs?
+        res.status(500).send("An error occurred while executing the query.");
         res.redirect("/register");
       } else {
         res.render("login");
       }
     });
   } catch (error) {
-    console.log(error); // don't show this in production
-    res.status(500).send("An error occurred."); // change it for servererror.ejs?
+    res.status(500).send("An error occurred.");
     res.redirect("/register");
   }
 };

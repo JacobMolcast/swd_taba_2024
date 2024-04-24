@@ -1,5 +1,7 @@
 const bcrypt = require("bcrypt");
 const db = require("../db.js");
+const {encrypt, decrypt} = require("./crypto");
+
 
 register = async (req, res) => {
   try {
@@ -25,17 +27,17 @@ register = async (req, res) => {
           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
       sqlValues = [
-        req.body.first_name,
-        req.body.last_name,
-        req.body.tel_no,
-        req.body.email,
-        req.body.user_name,
+        encrypt(req.body.first_name),
+        encrypt(req.body.last_name),
+        encrypt(req.body.tel_no),
+        encrypt(req.body.email),
+        encrypt(req.body.user_name),
         hashedPassword,
         salt,
-        req.body.street,
-        req.body.city,
-        req.body.postal_code,
-        req.body.country,
+        encrypt(req.body.street),
+        encrypt(req.body.city),
+        encrypt(req.body.postal_code),
+        encrypt(req.body.country),
         1,
       ];
     } else {
@@ -62,37 +64,35 @@ register = async (req, res) => {
             VALUES (?, ?, ?, ?);
         `;
       sqlValues = [
-        req.body.first_name,
-        req.body.last_name,
-        req.body.tel_no,
-        req.body.email,
-        req.body.user_name,
+        encrypt(req.body.first_name),
+        encrypt(req.body.last_name),
+        encrypt(req.body.tel_no),
+        encrypt(req.body.email),
+        encrypt(req.body.user_name),
         hashedPassword,
         salt,
-        req.body.street,
-        req.body.city,
-        req.body.postal_code,
-        req.body.country,
+        encrypt(req.body.street),
+        encrypt(req.body.city),
+        encrypt(req.body.postal_code),
+        encrypt(req.body.country),
         0,
-        req.body.street_delivery,
-        req.body.city_delivery,
-        req.body.postal_code_delivery,
-        req.body.country_delivery,
+        encrypt(req.body.street_delivery),
+        encrypt(req.body.city_delivery),
+        encrypt(req.body.postal_code_delivery),
+        encrypt(req.body.country_delivery),
       ];
     }
 
     db.query(sql, sqlValues, (error) => {
       if (error) {
-        console.log(error); // don't show this in production
-        res.status(500).send("An error occurred while executing the query."); // change it for servererror.ejs?
+        res.status(500).send("An error occurred while executing the query.");
         res.redirect("/register");
       } else {
         res.render("login");
       }
     });
   } catch (error) {
-    console.log(error); // don't show this in production
-    res.status(500).send("An error occurred."); // change it for servererror.ejs?
+    res.status(500).send("An error occurred.");
     res.redirect("/register");
   }
 };

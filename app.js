@@ -7,7 +7,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, "public")));
 const bodyParser = require("body-parser");
 app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const register = require("./routes/register.js");
 const {retrieve, update} = require("./routes/update.js");
@@ -24,12 +24,21 @@ const {
 } = require("./routes/auth.js");
 initializePassport(passport);
 
+const {encrypt, decrypt} = require("./routes/crypto");
+
 app.use(flash());
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60, // 1 minute
+      secure: false,//needs to be true for production
+      httpOnly: true,
+      sameSite: "strict"
+    }
+
   }),
 );
 app.use(passport.initialize());
@@ -62,7 +71,6 @@ app.post("/login", checkNotAuthenticated, (req, res, next) => {
 app.post("/logout", authenticationMiddleware(), (req, res) => {
   req.session.destroy(function (err) {
     if (err) {
-      console.error(err); // remove this line for production
       return res.redirect("/login");
     }
     res.redirect("/login");
@@ -74,7 +82,7 @@ app.get("/forgot-password", checkNotAuthenticated, function (req, res) {
 });
 
 app.get("/dashboard", authenticationMiddleware(), function (req, res) {
-  res.render("dashboard", { name: req.user.first_name, id: req.user.customer_id});
+  res.render("dashboard", { name: decrypt(req.user.first_name), id: req.user.customer_id, admin: req.user.admin_role});
 });
 
 app.get("/edit-profile", authenticationMiddleware(), (req, res) => {

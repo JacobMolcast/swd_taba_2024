@@ -6,28 +6,16 @@
     <title>Mehn app store</title>
     <link rel="stylesheet" type="text/css" href="/style.css">
     <script src="https://unpkg.com/htmx.org"></script>
-    <script src="script.js"></script>
 </head>
 <body>
     <%- include("../public/header.ejs") -%>
     <h1>Mehn App Store</h1>
-<!-- <div class="container"> -->
-    <!-- <div class="column">
-        <p>Welcome to the MehN app store</p>
-        <p>Here you can find all of the apps you need to make your life easier</p>
-    </div> -->
-    <div id = "index" class="center-anchors">
-        <!-- <div id = "login" class="column"> -->
-            <!-- <a href="/about"> About Page</a><br> -->
-            <a href="/login" hx-get="/login" hx-swap="outerHTML" hx-target="#index" hx-select="#login">login</a><br>
-        <!-- </div>
-        <div class="column"> -->
-            <!-- <a href="/signup"> signup</a><br> -->
-            <a href="/register" hx-get="/register" hx-swap="outerHTML" hx-target="#index" hx-select="#register">register</a><br>
-            <a href="/forgot-password" hx-get="/forgot-password" hx-swap="outerHTML" hx-target="#index" hx-select="#reset-password">forgot password</a><br>
-        <!-- </div> -->
-    <!-- </div> -->
+    <div id="index" class="center-anchors">
+        <a href="/login" hx-get="/login" hx-swap="outerHTML" hx-target="#index" hx-select="#login">login</a><br>
+        <a href="/register" hx-get="/register" hx-swap="outerHTML" hx-target="#index" hx-select="#register">register</a><br>
+        <a href="/forgot-password" hx-get="/forgot-password" hx-swap="outerHTML" hx-target="#index" hx-select="#reset-password">forgot password</a><br>
     </div>
     <%- include("../public/footer.ejs") -%>
+    <script src="script.js"></script>
 </body>
 </html>

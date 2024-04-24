@@ -36,6 +36,7 @@
     "color-name": "^1.1.4",
     "concat-map": "^0.0.1",
     "cross-spawn": "^7.0.3",
+    "crypto": "^1.0.1",
     "debug": "^4.3.4",
     "deep-is": "^0.1.4",
     "doctrine": "^3.0.0",

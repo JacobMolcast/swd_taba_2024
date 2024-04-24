@@ -15,7 +15,7 @@
             <p>Welcome <%= name %></p>
             <a href="/edit-profile">Edit Profile</a>
             <a href="/delete-account">Delete account</a>
-            <% if (id === 1) { %>
+            <% if (admin === 1) { %>
                 <a href="/admin">Admin</a>
             <% } %>
         <input type="submit" value="Log out">

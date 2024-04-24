@@ -35,3 +35,10 @@ dashboard.ejs view. Rendered when the user logs in successfully.
 ------------------------
 SETTING UP PASSPORT.js
 Passport.js middleware authentication. Modular Design: strategies, local
+---------------
+Todo list
+- GitKraken - instead of commands GUI clicks
+- Priviledges in MySQL
+- Vite/Webpack and Babel. Vite is a build to compile React JSX and ES6 code into plain JavaScript in an understandable way for the browser. Babel is a bundler to transpile JSX and ES6 code.
+- CSS Preprocessor or CSS-in-JS library: I may use a CSS preprocessor like Sass, or a CSS-in-JS library like styled-components.
+HTTP Client: To make HTTP requests from the React app, I can use the built-in fetch API, or a library like axios.
