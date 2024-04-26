@@ -2,6 +2,7 @@ const db = require("../db.js");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const {encrypt, decrypt} = require("./crypto");
+const xss = require('xss');
 
 let delivery_address_id = 0;
 
@@ -78,17 +79,17 @@ update = async (req, res) => {
           WHERE customer_id = ?;
         `;
       sqlValues = [
-        encrypt(req.body.first_name),
-        encrypt(req.body.last_name),
-        encrypt(req.body.tel_no),
-        encrypt(req.body.email),
-        encrypt(req.body.user_name),
+        encrypt(xss(req.body.first_name)),
+        encrypt(xss(req.body.last_name)),
+        encrypt(xss(req.body.tel_no)),
+        encrypt(xss(req.body.email)),
+        encrypt(xss(req.body.user_name)),
         hashedPassword,
         salt,
-        encrypt(req.body.street),
-        encrypt(req.body.city),
-        encrypt(req.body.postal_code),
-        encrypt(req.body.country),
+        encrypt(xss(req.body.street)),
+        encrypt(xss(req.body.city)),
+        encrypt(xss(req.body.postal_code)),
+        encrypt(xss(req.body.country)),
         1,
         req.user.customer_id,
       ];
@@ -116,37 +117,37 @@ update = async (req, res) => {
           WHERE delivery_address_id = ?;
         `;
       sqlValues = [
-        encrypt(req.body.first_name),
-          encrypt(req.body.last_name),
-            encrypt(req.body.tel_no),
-        encrypt(req.body.email),
-        encrypt(req.body.user_name),
+        encrypt(xss(req.body.first_name)),
+        encrypt(xss(req.body.last_name)),
+        encrypt(xss(req.body.tel_no)),
+        encrypt(xss(req.body.email)),
+        encrypt(xss(req.body.user_name)),
         hashedPassword,
         salt,
-        encrypt(req.body.street),
-        encrypt(req.body.city),
-        encrypt(req.body.postal_code),
-        encrypt(req.body.country),
+        encrypt(xss(req.body.street)),
+        encrypt(xss(req.body.city)),
+        encrypt(xss(req.body.postal_code)),
+        encrypt(xss(req.body.country)),
         0,
         req.user.customer_id,
-        encrypt(req.body.street_delivery),
-        encrypt(req.body.city_delivery),
-        encrypt(req.body.postal_code_delivery),
-        encrypt(req.body.country_delivery),
+        encrypt(xss(req.body.street_delivery)),
+        encrypt(xss(req.body.city_delivery)),
+        encrypt(xss(req.body.postal_code_delivery)),
+        encrypt(xss(req.body.country_delivery)),
         delivery_address_id,
       ];
     }
 
     db.query(sql, sqlValues, (error) => {
       if (error) {
-        res.status(500).send("An error occurred while executing the query.");
+        res.status(500).render("An error occurred while executing the query.");
         res.redirect("/register");
       } else {
         res.render("login");
       }
     });
   } catch (error) {
-    res.status(500).send("An error occurred.");
+    res.status(500).render("An error occurred.");
     res.redirect("/register");
   }
 };

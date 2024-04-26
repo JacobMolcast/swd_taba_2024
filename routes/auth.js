@@ -2,13 +2,14 @@ const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 const db = require("../db.js");
 const {encrypt} = require("./crypto");
+const xss = require('xss');
 
 function initializePassport(passport) {
   let failedAttempts = {};
   const authenticateUser = async (userName, password, done) => {
     return db.query(
       `SELECT customer_id, first_name, user_password, admin_role FROM customers WHERE user_name = ? OR email = ? LIMIT 1`,
-      [encrypt(userName), encrypt(userName)],
+      [encrypt(xss(userName)), encrypt(xss(userName))],
       function (error, results) {
         if (error) {
           return done(error);

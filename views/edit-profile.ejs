@@ -39,42 +39,45 @@
     <%- include("../public/header.ejs") -%>
 
     <h1>Edit profile</h1>
+    <% if (messages.error) { %>
+        <p class="error"><%= messages.error %></p>
+    <% } %>
     <form action="/edit-profile" method="post">
         <div class="container">
             <div class="columnregister">
                 <h4>Contact</h4>
                 <label for="first_name">First name:</label>
-                <input type="text" id="first_name" name="first_name" value="<%= first_name %>" required>
+                <input type="text" id="first_name" name="first_name" value="<%= first_name %>" maxlength="32" required>
                 <label for="last_name">Last name:</label>
-                <input type="text" id="last_name" name="last_name" value="<%= last_name %>" required>
+                <input type="text" id="last_name" name="last_name" value="<%= last_name %>" maxlength="32" required>
                 <br>
 
                 <label for="tel_no">Telephone number:</label>
-                <input type="tel" id="tel_no" name="tel_no" value="<%= tel_no %>" required>
+                <input type="tel" id="tel_no" name="tel_no" value="<%= tel_no %>" maxlength="32" required>
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="<%= email %>" required>
+                <input type="email" id="email" name="email" value="<%= email %>" maxlength="32" required>
                 <br>
             </div>
             <div class="columnregister">
                 <h4>Access</h4>
                 <label for="user_name">Username:</label>
-                <input type="text" id="user_name" name="user_name" value="<%= user_name %>" required> 
+                <input type="text" id="user_name" name="user_name" value="<%= user_name %>" maxlength="32" required> 
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" maxlength="63" required>
                 <label for="confirm_password">Confirm password:</label>
-                <input type="password" id="confirm_password" name="confirm_password" required>
+                <input type="password" id="confirm_password" name="confirm_password" maxlength="63" required>
                 <br>
             </div>
             <div class="columnregister">
                 <h4>Billing address</h4>
                 <label for="street">Street:</label>
-                <input type="text" id="street" name="street" value="<%= street %>" required>
+                <input type="text" id="street" name="street" value="<%= street %>" maxlength="32" required>
                 <label for="city">City:</label>
-                <input type="text" id="city" name="city" value="<%= city %>" required>
+                <input type="text" id="city" name="city" value="<%= city %>" maxlength="32" required>
                 <label for="postal_code">Postal code:</label>
-                <input type="text" id="postal_code" name="postal_code" value="<%= postal_code %>" required>
+                <input type="text" id="postal_code" name="postal_code" value="<%= postal_code %>" maxlength="32" required>
                 <label for="country">Country:</label>
-                <input type="text" id="country" name="country" value="<%= country %>" required>
+                <input type="text" id="country" name="country" value="<%= country %>" maxlength="32" required>
                 
                 <label for="same_billing_delivery_address">Same billing delivery address?</label>
                 <input type="checkbox" id="same_billing_delivery_address" name="same_billing_delivery_address">
@@ -84,13 +87,13 @@
                 <div id="delivery_address">
                     <h4>Delivery address</h4>  
                     <label for="street_delivery">Street:</label>
-                    <input type="text" id="street_delivery" name="street_delivery" value="<%= street_delivery %>">
+                    <input type="text" id="street_delivery" name="street_delivery" value="<%= street_delivery %>" maxlength="32">
                     <label for="city_delivery">City:</label>
-                    <input type="text" id="city_delivery" name="city_delivery" value="<%= city_delivery %>">
+                    <input type="text" id="city_delivery" name="city_delivery" value="<%= city_delivery %>" maxlength="32">
                     <label for="postal_code_delivery">Postal code:</label>
-                    <input type="text" id="postal_code_delivery" name="postal_code_delivery" value="<%= postal_code_delivery %>">
+                    <input type="text" id="postal_code_delivery" name="postal_code_delivery" value="<%= postal_code_delivery %>" maxlength="32">
                     <label for="country_delivery">Country:</label>
-                    <input type="text" id="country_delivery" name="country_delivery" value="<%= country_delivery %>">
+                    <input type="text" id="country_delivery" name="country_delivery" value="<%= country_delivery %>" maxlength="32">
                 </div>        
             </div>
         </div>

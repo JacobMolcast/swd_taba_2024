@@ -9,6 +9,9 @@ const key = crypto.createHash('sha512').update(secret_key, 'utf-8').digest('hex'
 const iv = crypto.createHash('sha512').update(secret_iv, 'utf-8').digest('hex').substr(0, 16);
 
 function encrypt(user_data) {
+  if (!user_data) {
+    return "no data";
+  }
   let cipher = crypto.createCipheriv(algorithm, key, iv);
   let encrypted = cipher.update(user_data, 'utf8', 'hex');
   encrypted += cipher.final('hex');

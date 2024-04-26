@@ -1,14 +1,6 @@
 const db = require("../db.js");
 const { decrypt } = require("./crypto");
-
-function escapeHtml(unsafe) {
-  return unsafe
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
+const xss = require('xss');
 
 const retrieve_all = (req, res) => {
   if (req.user && req.user.admin_role === 1) {
@@ -32,7 +24,7 @@ const retrieve_all = (req, res) => {
                 "country",
               ];
               return user_data.reduce((decryptedResult, column) => {
-                decryptedResult[column] = escapeHtml(decrypt(result[column]));
+                decryptedResult[column] = xss(decrypt(result[column]));
                 return decryptedResult;
               }, {});
             }),

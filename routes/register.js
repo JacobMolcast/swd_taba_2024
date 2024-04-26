@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const db = require("../db.js");
 const {encrypt} = require("./crypto");
+const xss = require('xss');
 
 
 register = async (req, res) => {
@@ -27,17 +28,17 @@ register = async (req, res) => {
           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
       sqlValues = [
-        encrypt(req.body.first_name),
-        encrypt(req.body.last_name),
-        encrypt(req.body.tel_no),
-        encrypt(req.body.email),
-        encrypt(req.body.user_name),
+        encrypt(xss(req.body.first_name)),
+        encrypt(xss(req.body.last_name)),
+        encrypt(xss(req.body.tel_no)),
+        encrypt(xss(req.body.email)),
+        encrypt(xss(req.body.user_name)),
         hashedPassword,
         salt,
-        encrypt(req.body.street),
-        encrypt(req.body.city),
-        encrypt(req.body.postal_code),
-        encrypt(req.body.country),
+        encrypt(xss(req.body.street)),
+        encrypt(xss(req.body.city)),
+        encrypt(xss(req.body.postal_code)),
+        encrypt(xss(req.body.country)),
         1,
       ];
     } else {
@@ -64,35 +65,33 @@ register = async (req, res) => {
             VALUES (?, ?, ?, ?);
         `;
       sqlValues = [
-        encrypt(req.body.first_name),
-        encrypt(req.body.last_name),
-        encrypt(req.body.tel_no),
-        encrypt(req.body.email),
-        encrypt(req.body.user_name),
+        encrypt(xss(req.body.first_name)),
+        encrypt(xss(req.body.last_name)),
+        encrypt(xss(req.body.tel_no)),
+        encrypt(xss(req.body.email)),
+        encrypt(xss(req.body.user_name)),
         hashedPassword,
         salt,
-        encrypt(req.body.street),
-        encrypt(req.body.city),
-        encrypt(req.body.postal_code),
-        encrypt(req.body.country),
+        encrypt(xss(req.body.street)),
+        encrypt(xss(req.body.city)),
+        encrypt(xss(req.body.postal_code)),
+        encrypt(xss(req.body.country)),
         0,
-        encrypt(req.body.street_delivery),
-        encrypt(req.body.city_delivery),
-        encrypt(req.body.postal_code_delivery),
-        encrypt(req.body.country_delivery),
+        encrypt(xss(req.body.street_delivery)),
+        encrypt(xss(req.body.city_delivery)),
+        encrypt(xss(req.body.postal_code_delivery)),
+        encrypt(xss(req.body.country_delivery)),
       ];
     }
 
     db.query(sql, sqlValues, (error) => {
       if (error) {
-        res.status(500).send("An error occurred while executing the query.");
         res.redirect("/register");
       } else {
         res.render("login");
       }
     });
   } catch (error) {
-    res.status(500).send("An error occurred.");
     res.redirect("/register");
   }
 };
