@@ -42,3 +42,8 @@ Todo list
 - Vite/Webpack and Babel. Vite is a build to compile React JSX and ES6 code into plain JavaScript in an understandable way for the browser. Babel is a bundler to transpile JSX and ES6 code.
 - CSS Preprocessor or CSS-in-JS library: I may use a CSS preprocessor like Sass, or a CSS-in-JS library like styled-components.
 HTTP Client: To make HTTP requests from the React app, I can use the built-in fetch API, or a library like axios.
+--------------------
+-	Testing Libraries: Jest is a popular testing library for React applications. For testing Express APIs, I may use a combination of Mocha, Chai, and Supertest.
+-	Database ORM/ODM: To interact with MySQL from the Express.js app, I’ll need an ORM (Object-Relational Mapper) like Sequelize.
+-	Environment Variables Manager: I'll need a way to manage environment variables, especially for sensitive data like database credentials. The dotenv package is commonly used for this in Node.js projects.
+-	Deployment: Depending on where I want to deploy the application, I may need additional tools. For example, if I’m deploying to a platform like Heroku, I'll need the Heroku CLI.

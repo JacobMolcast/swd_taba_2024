@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const db = require("../db.js");
-const {encrypt, decrypt} = require("./crypto");
+const {encrypt} = require("./crypto");
 
 
 register = async (req, res) => {

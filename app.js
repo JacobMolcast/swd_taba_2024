@@ -38,7 +38,6 @@ app.use(
       httpOnly: true,
       sameSite: "strict"
     }
-
   }),
 );
 app.use(passport.initialize());

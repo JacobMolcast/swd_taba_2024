@@ -1,7 +1,7 @@
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 const db = require("../db.js");
-const {encrypt, decrypt} = require("./crypto");
+const {encrypt} = require("./crypto");
 
 function initializePassport(passport) {
   let failedAttempts = {};
